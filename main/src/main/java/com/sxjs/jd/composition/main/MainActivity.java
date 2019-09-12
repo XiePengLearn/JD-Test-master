@@ -185,7 +185,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
                     .hide(mMyFragment)
                     .show(mFindFragment)
                     .commitAllowingStateLoss();
-        }else if(position == 4){
+        }else if(position == 3){
             mFragmentManager.beginTransaction()
                     .hide(mClassificationFragment)
                     .hide(mMainHomeFragment)

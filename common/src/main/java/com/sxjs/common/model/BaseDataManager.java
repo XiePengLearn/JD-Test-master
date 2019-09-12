@@ -12,7 +12,7 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
 /**
- * @author：LiuXiaoDong on 2018/4/20 18:07.
+ * @author：xiepeng on 2018/4/20 18:07.
  *
  * DataManager的包装基类,供各module继承
  */

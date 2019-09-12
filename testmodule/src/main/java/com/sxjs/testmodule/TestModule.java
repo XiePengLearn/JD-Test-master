@@ -8,7 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.facade.template.IProvider;
 
 /**
- * @author liuxiaodong
+ * @author xiepeng
  * @date 2018/12/1
  * @description
  */

@@ -22,7 +22,7 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
 /**
- * @author：LiuXiaoDong on 2018/4/20 18:26.
+ * @author：xiepeng on 2018/4/20 18:26.
  */
 
 public class MainDataManager extends BaseDataManager{

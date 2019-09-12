@@ -9,7 +9,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 /**
- * @author：LiuXiaoDong on 2018/4/20 18:26.
+ * @author：xiepeng on 2018/4/20 18:26.
  */
 
 public interface MainApiService extends BaseApiService{

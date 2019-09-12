@@ -14,7 +14,7 @@ import com.sxjs.common.base.BaseFragment;
 import com.sxjs.jd.R;
 
 /**
- * @author liuxiaodong
+ * @author xiepeng
  * @date 2018/12/1
  * @description
  */

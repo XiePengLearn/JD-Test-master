@@ -8,7 +8,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.sxjs.common.base.BaseActivity;
 
 /**
- * @author liuxiaodong
+ * @author xiepeng
  * @date 2018/12/1
  * @description
  */

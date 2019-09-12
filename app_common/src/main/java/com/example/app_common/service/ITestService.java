@@ -3,7 +3,7 @@ package com.example.app_common.service;
 import com.alibaba.android.arouter.facade.template.IProvider;
 
 /**
- * @author liuxiaodong
+ * @author xiepeng
  * @date 2018/12/1
  * @description 在common库中暴露接口  从test module 获取数据
  */

@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="让购物更便捷"
+            android:text="请求数据"
             android:textColor="#666666"
             android:textSize="14sp"
             />
@@ -39,9 +39,9 @@
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/ren"
-            android:layout_width="52dp"
-            android:layout_height="73dp" 
-            android:src="@drawable/xm"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/icon_loading_drop"
             />
         <ImageView
             android:id="@+id/hezi"
@@ -50,13 +50,14 @@
             android:layout_centerVertical="true"
             android:layout_width="18dp"
             android:layout_height="15dp"
-            android:src="@drawable/xk"
             />
+            <!--android:src="@drawable/xk"-->
+
         <ImageView
             android:visibility="gone"
             android:id="@+id/donghua"
-            android:layout_width="49dp"
-            android:layout_height="73dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:src="@drawable/refresh_down_icon"
             />
     </RelativeLayout>

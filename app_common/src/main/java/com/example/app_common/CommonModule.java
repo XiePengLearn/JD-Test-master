@@ -8,7 +8,7 @@ import com.squareup.leakcanary.LeakCanary;
 import com.sxjs.common.GlobalAppComponent;
 
 /**
- * @author liuxiaodong
+ * @author xiepeng
  * @date 2018/12/1
  * @description
  */

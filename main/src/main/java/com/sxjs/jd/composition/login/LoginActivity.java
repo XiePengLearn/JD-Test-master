@@ -12,7 +12,7 @@ import com.sxjs.common.base.BaseActivity;
 import okhttp3.ResponseBody;
 
 /**
- * @author LiuXiaoDong
+ * @author xiepeng
  */
 @Route(path = "/test/login")
 public class LoginActivity extends BaseActivity {
