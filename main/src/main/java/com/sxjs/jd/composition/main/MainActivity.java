@@ -32,16 +32,16 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseActivity implements MainContract.View, BottomNavigationBar.OnTabSelectedListener {
 
     @Inject
-    MainPresenter presenter;
+    MainPresenter       presenter;
     @BindView(R2.id.bottom_navigation_bar1)
     BottomNavigationBar bottomNavigationBar;
     @BindView(R2.id.main_container)
-    FrameLayout mainContainer;
-    private MainHomeFragment mMainHomeFragment;
+    FrameLayout         mainContainer;
+    private MainHomeFragment       mMainHomeFragment;
     private ClassificationFragment mClassificationFragment;
-    private FragmentManager mFragmentManager;
-    private FindFragment mFindFragment;
-    private MyFragment mMyFragment;
+    private FragmentManager        mFragmentManager;
+    private FindFragment           mFindFragment;
+    private MyFragment             mMyFragment;
 
 
     @Override
@@ -62,30 +62,39 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
         mFindFragment = (FindFragment) mFragmentManager.findFragmentByTag("find_fg");
         mMyFragment = (MyFragment) mFragmentManager.findFragmentByTag("my_fg");
 
-        if(mMainHomeFragment == null){
+        if (mMainHomeFragment == null) {
             mMainHomeFragment = MainHomeFragment.newInstance();
             addFragment(R.id.main_container, mMainHomeFragment, "home_fg");
         }
-        if(mClassificationFragment == null){
+        //更改位置,初始化在  点击底部导航栏 position 为1  初始化
+        /*if(mClassificationFragment == null){
             mClassificationFragment = ClassificationFragment.newInstance();
             addFragment(R.id.main_container, mClassificationFragment, "class_fg");
-        }
+        }*/
 
-        if(mFindFragment == null){
+        //更改位置,初始化在  点击底部导航栏 position 为2  初始化
+        /*if(mFindFragment == null){
             mFindFragment = FindFragment.newInstance();
             addFragment(R.id.main_container, mFindFragment, "find_fg");
-        }
+        }*/
 
-        if(mMyFragment == null){
+        //更改位置,初始化在  点击底部导航栏 position 为3  初始化
+        /*if(mMyFragment == null){
             mMyFragment = MyFragment.newInstance();
             addFragment(R.id.main_container, mMyFragment, "my_fg");
-        }
+        }*/
 
         mFragmentManager.beginTransaction().show(mMainHomeFragment)
-                .hide(mClassificationFragment)
-                .hide(mFindFragment)
-                .hide(mMyFragment)
                 .commitAllowingStateLoss();
+        if (mClassificationFragment != null) {
+            mFragmentManager.beginTransaction().hide(mClassificationFragment).commitAllowingStateLoss();
+        }
+        if (mFindFragment != null) {
+            mFragmentManager.beginTransaction().hide(mFindFragment).commitAllowingStateLoss();
+        }
+        if (mMyFragment != null) {
+            mFragmentManager.beginTransaction().hide(mMyFragment).commitAllowingStateLoss();
+        }
 
         DaggerMainActivityComponent.builder()
                 .appComponent(getAppComponent())
@@ -94,6 +103,90 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
                 .inject(this);
         initBottomNavigation();
 
+    }
+
+    @Override
+    public void onTabSelected(int position) {
+        if (position == 0) {
+            if (mMainHomeFragment == null) {
+                mMainHomeFragment = MainHomeFragment.newInstance();
+                addFragment(R.id.main_container, mMainHomeFragment, "home_fg");
+            }
+            mFragmentManager.beginTransaction()
+
+                    .show(mMainHomeFragment)
+                    .commitAllowingStateLoss();
+
+            if (mClassificationFragment != null) {
+                mFragmentManager.beginTransaction().hide(mClassificationFragment).commitAllowingStateLoss();
+            }
+            if (mFindFragment != null) {
+                mFragmentManager.beginTransaction().hide(mFindFragment).commitAllowingStateLoss();
+            }
+            if (mMyFragment != null) {
+                mFragmentManager.beginTransaction().hide(mMyFragment).commitAllowingStateLoss();
+            }
+        } else if (position == 1) {
+            if (mClassificationFragment == null) {
+                mClassificationFragment = ClassificationFragment.newInstance();
+                addFragment(R.id.main_container, mClassificationFragment, "class_fg");
+            }
+            mFragmentManager.beginTransaction()
+                    .show(mClassificationFragment)
+                    .commitAllowingStateLoss();
+
+
+            if (mMainHomeFragment != null) {
+                mFragmentManager.beginTransaction().hide(mMainHomeFragment).commitAllowingStateLoss();
+            }
+
+            if (mFindFragment != null) {
+                mFragmentManager.beginTransaction().hide(mFindFragment).commitAllowingStateLoss();
+            }
+            if (mMyFragment != null) {
+                mFragmentManager.beginTransaction().hide(mMyFragment).commitAllowingStateLoss();
+            }
+
+        } else if (position == 2) {
+            if (mFindFragment == null) {
+                mFindFragment = FindFragment.newInstance();
+                addFragment(R.id.main_container, mFindFragment, "find_fg");
+            }
+            mFragmentManager.beginTransaction()
+                    .show(mFindFragment)
+                    .commitAllowingStateLoss();
+
+            if (mMainHomeFragment != null) {
+                mFragmentManager.beginTransaction().hide(mMainHomeFragment).commitAllowingStateLoss();
+            }
+            if (mClassificationFragment != null) {
+                mFragmentManager.beginTransaction().hide(mClassificationFragment).commitAllowingStateLoss();
+            }
+
+            if (mMyFragment != null) {
+                mFragmentManager.beginTransaction().hide(mMyFragment).commitAllowingStateLoss();
+            }
+        } else if (position == 3) {
+
+            if (mMyFragment == null) {
+                mMyFragment = MyFragment.newInstance();
+                addFragment(R.id.main_container, mMyFragment, "my_fg");
+            }
+            mFragmentManager.beginTransaction()
+                    .show(mMyFragment)
+                    .commitAllowingStateLoss();
+
+            if (mMainHomeFragment != null) {
+                mFragmentManager.beginTransaction().hide(mMainHomeFragment).commitAllowingStateLoss();
+            }
+            if (mClassificationFragment != null) {
+                mFragmentManager.beginTransaction().hide(mClassificationFragment).commitAllowingStateLoss();
+            }
+            if (mFindFragment != null) {
+                mFragmentManager.beginTransaction().hide(mFindFragment).commitAllowingStateLoss();
+            }
+
+        }
     }
 
     private void initBottomNavigation() {
@@ -114,7 +207,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
                 .addItem(new BottomNavigationItem(R.drawable.axh, "").setInactiveIconResource(R.drawable.axg).setActiveColorResource(R.color.colorAccent))
                 .addItem(new BottomNavigationItem(R.drawable.axd, "").setInactiveIconResource(R.drawable.axc).setActiveColorResource(R.color.colorAccent))
                 .addItem(new BottomNavigationItem(R.drawable.axf, "").setInactiveIconResource(R.drawable.axe).setActiveColorResource(R.color.colorAccent))
-//                .addItem(new BottomNavigationItem(R.drawable.axb, "").setInactiveIconResource(R.drawable.axa).setActiveColorResource(R.color.colorAccent).setBadgeItem(numberBadgeItem))
+                //                .addItem(new BottomNavigationItem(R.drawable.axb, "").setInactiveIconResource(R.drawable.axa).setActiveColorResource(R.color.colorAccent).setBadgeItem(numberBadgeItem))
                 .addItem(new BottomNavigationItem(R.drawable.axj, "").setInactiveIconResource(R.drawable.axi).setActiveColorResource(R.color.colorAccent))
                 .setFirstSelectedPosition(0)
                 .initialise();
@@ -136,22 +229,22 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
     @Override
     public void setLoginData(String loginData) {
         this.loginData = loginData;
-        Toast.makeText(this, "loginData:"+loginData, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "loginData:" + loginData, Toast.LENGTH_SHORT).show();
 
 
-        Log.e(TAG, "loginData: "+loginData);
+        Log.e(TAG, "loginData: " + loginData);
 
         ITokenService service = ARouter.getInstance().navigation(ITokenService.class);
-        if(service != null){
-//            String xinGeToken = service.getToken();
-//            PrefUtils.writeXinGeToken(xinGeToken, this.getApplicationContext());
+        if (service != null) {
+            //            String xinGeToken = service.getToken();
+            //            PrefUtils.writeXinGeToken(xinGeToken, this.getApplicationContext());
             String xinGeToken = PrefUtils.readXinGeToken(this.getApplicationContext());
-            Log.e(TAG, "xinGeToken: "+xinGeToken);
-            PrefUtils.writeXinGeToken("1",this.getApplicationContext());
+            Log.e(TAG, "xinGeToken: " + xinGeToken);
+            PrefUtils.writeXinGeToken("1", this.getApplicationContext());
             String xinGeToken1 = PrefUtils.readXinGeToken(this.getApplicationContext());
-            Log.e(TAG, "xinGeToken1: "+xinGeToken1);
-        }else{
-            Toast.makeText(this,"该服务所在模块未参加编译",Toast.LENGTH_LONG).show();
+            Log.e(TAG, "xinGeToken1: " + xinGeToken1);
+        } else {
+            Toast.makeText(this, "该服务所在模块未参加编译", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -161,10 +254,10 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
 
         this.text = text;
 
-        Toast.makeText(this, "text:"+text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "text:" + text, Toast.LENGTH_SHORT).show();
 
 
-        Log.e(TAG, "initData: "+text);
+        Log.e(TAG, "initData: " + text);
 
 
     }
@@ -178,7 +271,6 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
     public void hiddenProgressDialogView() {
         hiddenProgressDialog();
     }
-
 
 
     @Override
@@ -199,41 +291,6 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
 
 
     @Override
-    public void onTabSelected(int position) {
-        if(position == 0){
-            mFragmentManager.beginTransaction()
-                    .hide(mFindFragment)
-                    .hide(mClassificationFragment)
-                    .hide(mMyFragment)
-                    .show(mMainHomeFragment)
-                    .commitAllowingStateLoss();
-        }
-        else if(position == 1){
-            mFragmentManager.beginTransaction()
-                    .hide(mFindFragment)
-                    .hide(mMainHomeFragment)
-                    .hide(mMyFragment)
-                    .show(mClassificationFragment)
-                    .commitAllowingStateLoss();
-        }
-        else if(position == 2){
-            mFragmentManager.beginTransaction()
-                    .hide(mClassificationFragment)
-                    .hide(mMainHomeFragment)
-                    .hide(mMyFragment)
-                    .show(mFindFragment)
-                    .commitAllowingStateLoss();
-        }else if(position == 3){
-            mFragmentManager.beginTransaction()
-                    .hide(mClassificationFragment)
-                    .hide(mMainHomeFragment)
-                    .hide(mFindFragment)
-                    .show(mMyFragment)
-                    .commitAllowingStateLoss();
-        }
-    }
-
-    @Override
     public void onTabUnselected(int position) {
 
     }
@@ -248,6 +305,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
         super.onStart();
 
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

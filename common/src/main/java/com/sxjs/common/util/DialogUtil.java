@@ -3,10 +3,12 @@ package com.sxjs.common.util;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.drawable.AnimationDrawable;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sxjs.common.R;
@@ -63,6 +65,10 @@ public class DialogUtil {
                 android.view.WindowManager.LayoutParams.WRAP_CONTENT);
         View view = context.getLayoutInflater().inflate(
                 R.layout.jd_loading_dialog, null);
+
+        ImageView ios_progressbar = (ImageView)view.findViewById(R.id.ios_progressbar);
+        AnimationDrawable anim_up = (AnimationDrawable) ios_progressbar.getBackground();
+        anim_up.start();
         window.setContentView(view);//
         return dialog;
 

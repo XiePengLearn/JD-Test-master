@@ -14,7 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.sxjs.common.util.DensityUtils;
-import com.kpi.client.utils.StatusBarUtil;
+import com.sxjs.common.util.PrefUtils;
+import com.sxjs.common.util.statusbar.StatusBarUtil;
 import com.sxjs.jd.composition.login.LoginActivity;
 
 import java.util.ArrayList;

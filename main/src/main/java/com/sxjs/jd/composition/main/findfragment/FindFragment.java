@@ -1,6 +1,7 @@
 package com.sxjs.jd.composition.main.findfragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,10 +32,11 @@ public class FindFragment extends BaseFragment implements FindContract.View, Ptr
     @Inject
     FindPresenter mPresenter;
     @BindView(R2.id.find_recyclerview)
-    RecyclerView findRecyclerview;
+    RecyclerView  findRecyclerview;
     @BindView(R2.id.find_pull_refresh_header)
-    JDHeaderView findPullRefreshHeader;
+    JDHeaderView  findPullRefreshHeader;
     private FindsAdapter adapter;
+    private Handler      mHandler;
 
     @Nullable
     @Override
@@ -43,6 +45,7 @@ public class FindFragment extends BaseFragment implements FindContract.View, Ptr
         unbinder = ButterKnife.bind(this, view);
         initView();
         initData();
+
         return view;
 
     }
@@ -66,12 +69,21 @@ public class FindFragment extends BaseFragment implements FindContract.View, Ptr
         adapter.setEnableLoadMore(true);
         findRecyclerview.setAdapter(adapter);
 
-
+        mHandler = new Handler();
 
     }
 
     public void initData() {
+        showJDLoadingDialog();
         mPresenter.getFindData();
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                hideJDLoadingDialog();
+            }
+        }, 2000);
     }
 
 
@@ -79,6 +91,9 @@ public class FindFragment extends BaseFragment implements FindContract.View, Ptr
 
     @Override
     public void setFindData(FindsBean find) {
+
+
+
         adapter.addData(find.content);
     }
 
@@ -99,19 +114,19 @@ public class FindFragment extends BaseFragment implements FindContract.View, Ptr
         }, 2000);
 
     }
+
     @Override
     public void onLoadMoreRequested() {
         findRecyclerview.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (adapter.getData().size() >= 90){
+                if (adapter.getData().size() >= 90) {
                     adapter.loadMoreEnd(false);
-                }
-                else{
+                } else {
                     mPresenter.getMoreFindData();
                 }
             }
-        },1000);
+        }, 1000);
 
     }
 }
