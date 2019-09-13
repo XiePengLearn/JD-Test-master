@@ -10,7 +10,6 @@ public interface MainContract {
     interface View {
         void setText(String text);
 
-        void setLoginData(String loginData);
 
         void showProgressDialogView();
 
@@ -26,7 +25,6 @@ public interface MainContract {
 
         Map getData();
 
-        void getLoginData();
     }
 
 }

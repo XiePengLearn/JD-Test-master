@@ -25,13 +25,13 @@ import okhttp3.ResponseBody;
  * @author：xiepeng on 2018/4/20 18:26.
  */
 
-public class MainDataManager extends BaseDataManager{
+public class MainDataManager extends BaseDataManager {
 
     public MainDataManager(DataManager mDataManager) {
         super(mDataManager);
     }
 
-    public static MainDataManager getInstance(DataManager dataManager){
+    public static MainDataManager getInstance(DataManager dataManager) {
         return new MainDataManager(dataManager);
     }
 
@@ -40,43 +40,30 @@ public class MainDataManager extends BaseDataManager{
      */
     public Disposable login(DisposableObserver<ResponseBody> consumer, String mobile, String verifyCode) {
 
-        return changeIOToMainThread(getService(MainApiService.class).login(mobile,verifyCode), consumer);
+        return changeIOToMainThread(getService(MainApiService.class).login(mobile, verifyCode), consumer);
     }
 
 
-    public Disposable getMainData(int start , int count , DisposableObserver<ResponseBody> consumer){
-        Map<String,Object> map = new HashMap<>(2);
-        map.put("start",start);
-        map.put("count",count);
-        return changeIOToMainThread(getService(BaseApiService.class).executeGet("http://www.baidu.com",map),consumer);
+    public Disposable getMainData(int start, int count, DisposableObserver<ResponseBody> consumer) {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("start", start);
+        map.put("count", count);
+        return changeIOToMainThread(getService(BaseApiService.class).executeGet("http://www.baidu.com", map), consumer);
 
     }
 
-    public Disposable getLoginData(String lAccount , String lPassword , DisposableObserver<ResponseBody> consumer){
-        Map<String,Object> map1 = new HashMap<>(2);
-        map1.put("start",lAccount);
-        map1.put("count",lPassword);
-
-        Map<String, Object> mapParameters = new HashMap<>(6);
-        mapParameters.put("MOBILE", lAccount);
-        mapParameters.put("PASSWORD", lPassword);
-        mapParameters.put("SIGNIN_TYPE", "1");
-        mapParameters.put("USER_TYPE", "1");
-        mapParameters.put("MOBILE_TYPE", "1");
-        mapParameters.put("XINGE_TOKEN", "431c5c98a2d66f423566271e36c35cddcb310cea");
-
-        Map<String, String> mapHeaders = new HashMap<>();
-        mapHeaders.put("ACTION", "S002");
-//        mapHeaders.put("SESSION_ID", TaskManager.SESSION_ID);
+    public Disposable getLoginData(Map<String, String> mapHeaders, Map<String, Object> mapParameters, DisposableObserver<ResponseBody> consumer) {
 
 
-        return changeIOToMainThread(getService(BaseApiService.class).executePostHeader("http://114.247.234.146:8086/api/s/v1",mapParameters,mapHeaders),consumer);
+
+
+
+        return changeIOToMainThread(getService(BaseApiService.class).executePostHeader("http://114.247.234.146:8086/api/s/v1", mapParameters, mapHeaders), consumer);
 
     }
 
 
-
-    public List<String> getTypeOfNameData(){
+    public List<String> getTypeOfNameData() {
         ArrayList<String> list = new ArrayList<>(20);
         for (int i = 0; i < 20; i++) {
             list.add("家用电器");
@@ -84,7 +71,7 @@ public class MainDataManager extends BaseDataManager{
         return list;
     }
 
-    public<S> Disposable getData(DisposableObserver<S> consumer , final Class<S> clazz , final String fillName) {
+    public <S> Disposable getData(DisposableObserver<S> consumer, final Class<S> clazz, final String fillName) {
         return Observable.create(new ObservableOnSubscribe<S>() {
             @Override
             public void subscribe(ObservableEmitter<S> e) throws Exception {

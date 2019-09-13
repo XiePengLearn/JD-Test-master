@@ -13,17 +13,24 @@ import com.tencent.android.tpush.XGPushManager;
  * @author admin
  */
 public class MyApplication extends Application {
-    private static Context mContext;
+    private static Context       mContext;
+    private static MyApplication instance;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        CommonModule.init(this);
+        instance = this;
         mContext = getApplicationContext();
+        CommonModule.init(this);
+
 
         //初始化信鸽
         registPushXG();
     }
 
+    public static MyApplication getInstance() {
+        return instance;
+    }
 
     public static Context getContext() {
         return mContext;

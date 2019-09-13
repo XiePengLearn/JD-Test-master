@@ -42,8 +42,8 @@ public class SplashActivity extends BaseActivity {
         mContext = SplashActivity.this;
         ButterKnife.bind(this);
         StatusBarUtil.setImmersiveStatusBar(this, true);
-        //        initViews();
-        new Handler().postDelayed(new Runnable() {
+        initViews();
+        /*new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (BuildConfig.DEBUG && !BuildConfig.DEBUG_ALL) {
@@ -53,7 +53,7 @@ public class SplashActivity extends BaseActivity {
                 }
                 finish();
             }
-        }, 2000);
+        }, 2000);*/
 
         String xinGeToken = XGPushConfig.getToken(mContext);
         String packageName = getPackageName();

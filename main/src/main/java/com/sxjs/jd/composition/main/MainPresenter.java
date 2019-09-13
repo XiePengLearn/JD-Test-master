@@ -32,33 +32,7 @@ public class MainPresenter extends BasePresenter implements MainContract.Present
 
     }
 
-    @Override
-    public void getLoginData() {
-        mMainView.showProgressDialogView();
-        Disposable disposable = mDataManager.getLoginData("15601267550", "xp13462922610", new ErrorDisposableObserver<ResponseBody>() {
-            @Override
-            public void onNext(ResponseBody responseBody) {
-                try {
-                    mMainView.setLoginData(responseBody.string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            //如果需要发生Error时操作UI可以重写onError，统一错误操作可以在ErrorDisposableObserver中统一执行
-            @Override
-            public void onError(Throwable e) {
-                super.onError(e);
-                mMainView.hiddenProgressDialogView();
-            }
 
-            @Override
-            public void onComplete() {
-                Log.e(TAG, "onComplete: " );
-                mMainView.hiddenProgressDialogView();
-            }
-        });
-        addDisposabe(disposable);
-    }
 
     @Override
     public void getText() {

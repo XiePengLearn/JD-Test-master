@@ -220,34 +220,12 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
 
     public void initData() {
         presenter.getText();
-        presenter.getLoginData();
     }
 
     private String text;
     private String loginData;
 
-    @Override
-    public void setLoginData(String loginData) {
-        this.loginData = loginData;
-        Toast.makeText(this, "loginData:" + loginData, Toast.LENGTH_SHORT).show();
 
-
-        Log.e(TAG, "loginData: " + loginData);
-
-        ITokenService service = ARouter.getInstance().navigation(ITokenService.class);
-        if (service != null) {
-            //            String xinGeToken = service.getToken();
-            //            PrefUtils.writeXinGeToken(xinGeToken, this.getApplicationContext());
-            String xinGeToken = PrefUtils.readXinGeToken(this.getApplicationContext());
-            Log.e(TAG, "xinGeToken: " + xinGeToken);
-            PrefUtils.writeXinGeToken("1", this.getApplicationContext());
-            String xinGeToken1 = PrefUtils.readXinGeToken(this.getApplicationContext());
-            Log.e(TAG, "xinGeToken1: " + xinGeToken1);
-        } else {
-            Toast.makeText(this, "该服务所在模块未参加编译", Toast.LENGTH_LONG).show();
-        }
-
-    }
 
     @Override
     public void setText(String text) {
