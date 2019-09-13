@@ -1,4 +1,4 @@
-package com.example.app.utils;
+package com.sxjs.common.util.statusbar;
 
 import android.os.Build;
 import android.text.TextUtils;

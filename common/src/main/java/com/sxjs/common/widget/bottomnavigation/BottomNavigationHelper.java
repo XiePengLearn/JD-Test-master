@@ -129,7 +129,7 @@ class BottomNavigationHelper {
         } else {
             bottomNavigationTab.setActiveColor(bottomNavigationBar.getActiveColor());
         }
-        
+
 
         if (inActiveColor != -1) {
             bottomNavigationTab.setInactiveColor(inActiveColor);

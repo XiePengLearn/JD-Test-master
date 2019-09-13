@@ -1,19 +1,10 @@
-package com.example.app;
+package com.kpi.client;
 
-import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
-import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -22,9 +13,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.example.app.utils.DensityUtils;
-import com.example.app.utils.PrefUtils;
-import com.example.app.utils.StatusBarUtil;
+import com.sxjs.common.util.DensityUtils;
+import com.kpi.client.utils.StatusBarUtil;
 import com.sxjs.jd.composition.login.LoginActivity;
 
 import java.util.ArrayList;

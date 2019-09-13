@@ -1,4 +1,4 @@
-package com.example.app;
+package com.kpi.client;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

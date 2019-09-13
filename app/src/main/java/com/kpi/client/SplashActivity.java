@@ -1,6 +1,5 @@
-package com.example.app;
+package com.kpi.client;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,13 +12,14 @@ import android.view.animation.AnimationSet;
 import android.widget.RelativeLayout;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.example.app.utils.PrefUtils;
-import com.example.app.utils.StatusBarUtil;
 import com.sxjs.common.base.BaseActivity;
+import com.sxjs.common.util.LogUtil;
+import com.sxjs.common.util.PrefUtils;
+import com.sxjs.common.util.statusbar.StatusBarUtil;
 import com.sxjs.jd.composition.login.LoginActivity;
 import com.sxjs.jd.composition.main.MainActivity;
+import com.tencent.android.tpush.XGPushConfig;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -30,9 +30,10 @@ import butterknife.ButterKnife;
 public class SplashActivity extends BaseActivity {
 
 
-    public static final String  PREF_IS_USER_GUIDE_SHOWED = "is_user_guide_showed";//标记新手引导是否已经展示过
-    public static final String  PREF_IS_ENTER_LOG_OR_MAIN = "is_enter_login_or_main";//标记进入登录页还是主页
-    private             Context mContext;
+    public static final  String  PREF_IS_USER_GUIDE_SHOWED = "is_user_guide_showed";//标记新手引导是否已经展示过
+    public static final  String  PREF_IS_ENTER_LOG_OR_MAIN = "is_enter_login_or_main";//标记进入登录页还是主页
+    private static final String  TAG                       = "SplashActivity";
+    private              Context mContext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class SplashActivity extends BaseActivity {
         mContext = SplashActivity.this;
         ButterKnife.bind(this);
         StatusBarUtil.setImmersiveStatusBar(this, true);
-//        initViews();
+        //        initViews();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -53,6 +54,13 @@ public class SplashActivity extends BaseActivity {
                 finish();
             }
         }, 2000);
+
+        String xinGeToken = XGPushConfig.getToken(mContext);
+        String packageName = getPackageName();
+        LogUtil.e(TAG, "token---------------:" + xinGeToken + "--packageName--;" + packageName);
+
+        PrefUtils.writeXinGeToken(xinGeToken, this.getApplicationContext());
+
     }
 
     // 初始化欢迎页面的动画

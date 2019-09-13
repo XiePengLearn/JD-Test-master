@@ -7,22 +7,26 @@ import java.util.Map;
  */
 
 public interface MainContract {
- interface View {
-    void setText(String text);
+    interface View {
+        void setText(String text);
 
-    void showProgressDialogView();
+        void setLoginData(String loginData);
 
-    void hiddenProgressDialogView();
-}
+        void showProgressDialogView();
 
- interface Presenter {
-    void getText();
+        void hiddenProgressDialogView();
+    }
 
-    void destory();
+    interface Presenter {
+        void getText();
 
-    void saveData();
+        void destory();
 
-    Map getData();
-}
+        void saveData();
+
+        Map getData();
+
+        void getLoginData();
+    }
 
 }

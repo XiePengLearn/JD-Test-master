@@ -13,4 +13,5 @@ public interface ITestService extends IProvider {
      * 模拟平行模块之间获取服务
      */
     String getTestPackageName();
+
 }

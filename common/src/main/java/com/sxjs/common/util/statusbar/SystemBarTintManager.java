@@ -1,4 +1,4 @@
-package com.example.app.utils;
+package com.sxjs.common.util.statusbar;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

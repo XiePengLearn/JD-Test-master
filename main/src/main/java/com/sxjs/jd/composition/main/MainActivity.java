@@ -3,9 +3,14 @@ package com.sxjs.jd.composition.main;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.app_common.service.ITokenService;
+import com.sxjs.common.util.PrefUtils;
 import com.sxjs.common.widget.bottomnavigation.BadgeItem;
 import com.sxjs.common.widget.bottomnavigation.BottomNavigationBar;
 import com.sxjs.common.widget.bottomnavigation.BottomNavigationItem;
@@ -47,6 +52,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
         mFragmentManager = getSupportFragmentManager();
         initView();
         initData();
+
 
     }
 
@@ -121,14 +127,46 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
 
     public void initData() {
         presenter.getText();
+        presenter.getLoginData();
     }
 
     private String text;
+    private String loginData;
+
+    @Override
+    public void setLoginData(String loginData) {
+        this.loginData = loginData;
+        Toast.makeText(this, "loginData:"+loginData, Toast.LENGTH_SHORT).show();
+
+
+        Log.e(TAG, "loginData: "+loginData);
+
+        ITokenService service = ARouter.getInstance().navigation(ITokenService.class);
+        if(service != null){
+//            String xinGeToken = service.getToken();
+//            PrefUtils.writeXinGeToken(xinGeToken, this.getApplicationContext());
+            String xinGeToken = PrefUtils.readXinGeToken(this.getApplicationContext());
+            Log.e(TAG, "xinGeToken: "+xinGeToken);
+            PrefUtils.writeXinGeToken("1",this.getApplicationContext());
+            String xinGeToken1 = PrefUtils.readXinGeToken(this.getApplicationContext());
+            Log.e(TAG, "xinGeToken1: "+xinGeToken1);
+        }else{
+            Toast.makeText(this,"该服务所在模块未参加编译",Toast.LENGTH_LONG).show();
+        }
+
+    }
 
     @Override
     public void setText(String text) {
 
         this.text = text;
+
+        Toast.makeText(this, "text:"+text, Toast.LENGTH_SHORT).show();
+
+
+        Log.e(TAG, "initData: "+text);
+
+
     }
 
     @Override

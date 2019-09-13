@@ -52,6 +52,30 @@ public class MainDataManager extends BaseDataManager{
 
     }
 
+    public Disposable getLoginData(String lAccount , String lPassword , DisposableObserver<ResponseBody> consumer){
+        Map<String,Object> map1 = new HashMap<>(2);
+        map1.put("start",lAccount);
+        map1.put("count",lPassword);
+
+        Map<String, Object> mapParameters = new HashMap<>(6);
+        mapParameters.put("MOBILE", lAccount);
+        mapParameters.put("PASSWORD", lPassword);
+        mapParameters.put("SIGNIN_TYPE", "1");
+        mapParameters.put("USER_TYPE", "1");
+        mapParameters.put("MOBILE_TYPE", "1");
+        mapParameters.put("XINGE_TOKEN", "431c5c98a2d66f423566271e36c35cddcb310cea");
+
+        Map<String, String> mapHeaders = new HashMap<>();
+        mapHeaders.put("ACTION", "S002");
+//        mapHeaders.put("SESSION_ID", TaskManager.SESSION_ID);
+
+
+        return changeIOToMainThread(getService(BaseApiService.class).executePostHeader("http://114.247.234.146:8086/api/s/v1",mapParameters,mapHeaders),consumer);
+
+    }
+
+
+
     public List<String> getTypeOfNameData(){
         ArrayList<String> list = new ArrayList<>(20);
         for (int i = 0; i < 20; i++) {

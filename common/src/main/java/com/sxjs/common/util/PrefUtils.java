@@ -1,4 +1,4 @@
-package com.example.app.utils;
+package com.sxjs.common.util;
 
 import android.app.Activity;
 import android.content.Context;
@@ -54,7 +54,8 @@ public class PrefUtils {
 
         return pref.getInt(key, defaultValue);
     }
-    public static void writePhone(String phone,Context context){
+
+    public static void writePhone(String phone, Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySharedPreferences.edit();
@@ -62,13 +63,14 @@ public class PrefUtils {
         editor.apply();
     }
 
-    public static String readPhone(Context context){
+    public static String readPhone(Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         return mySharedPreferences.getString("phone", "");
     }
+
     //0没有绑定手机号  1已经绑定手机号
-    public static void writeIsPhone(String isPhone,Context context){
+    public static void writeIsPhone(String isPhone, Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySharedPreferences.edit();
@@ -76,13 +78,13 @@ public class PrefUtils {
         editor.apply();
     }
 
-    public static String readIsPhone(Context context){
+    public static String readIsPhone(Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         return mySharedPreferences.getString("isPhone", "");
     }
 
-    public static void writeCity(String city,Context context){
+    public static void writeCity(String city, Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySharedPreferences.edit();
@@ -90,13 +92,13 @@ public class PrefUtils {
         editor.apply();
     }
 
-    public static String readCity(Context context){
+    public static String readCity(Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         return mySharedPreferences.getString("city", "");
     }
 
-    public static void writeLongitude(String longitude,Context context){
+    public static void writeLongitude(String longitude, Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySharedPreferences.edit();
@@ -104,13 +106,13 @@ public class PrefUtils {
         editor.apply();
     }
 
-    public static String readLongitude(Context context){
+    public static String readLongitude(Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         return mySharedPreferences.getString("longitude", "");
     }
 
-    public static void writeLatitude(String latitude,Context context){
+    public static void writeLatitude(String latitude, Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySharedPreferences.edit();
@@ -118,15 +120,14 @@ public class PrefUtils {
         editor.apply();
     }
 
-    public static String readLatitude(Context context){
+    public static String readLatitude(Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         return mySharedPreferences.getString("latitude", "");
     }
 
 
-
-    public static void writePassword(String password,Context context){
+    public static void writePassword(String password, Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySharedPreferences.edit();
@@ -134,15 +135,15 @@ public class PrefUtils {
         editor.apply();
     }
 
-    public static String readPassword(Context context){
+    public static String readPassword(Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         return mySharedPreferences.getString("password", "");
 
     }
 
-    //拣到 token
-    public static void writeToken(String token,Context context){
+    //绩时查 token
+    public static void writeToken(String token, Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySharedPreferences.edit();
@@ -150,15 +151,31 @@ public class PrefUtils {
         editor.apply();
     }
 
-    public static String readToken(Context context){
+    public static String readToken(Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         return mySharedPreferences.getString("token", "");
 
     }
 
-    //拣到 UID
-    public static void writeUid(String token,Context context){
+    //绩时查 token
+    public static void writeXinGeToken(String xinGeToken, Context context) {
+        SharedPreferences mySharedPreferences = context.getSharedPreferences(
+                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mySharedPreferences.edit();
+        editor.putString("xin_ge_token", xinGeToken);
+        editor.apply();
+    }
+
+    public static String readXinGeToken(Context context) {
+        SharedPreferences mySharedPreferences = context.getSharedPreferences(
+                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
+        return mySharedPreferences.getString("xin_ge_token", "");
+
+    }
+
+    //绩时查 UID
+    public static void writeUid(String token, Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySharedPreferences.edit();
@@ -166,7 +183,7 @@ public class PrefUtils {
         editor.apply();
     }
 
-    public static String readUid(Context context){
+    public static String readUid(Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         return mySharedPreferences.getString("uid", "");
@@ -175,7 +192,7 @@ public class PrefUtils {
 
     //微信 头像
 
-    public static void writeHeadImg(String token,Context context){
+    public static void writeHeadImg(String token, Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySharedPreferences.edit();
@@ -183,7 +200,7 @@ public class PrefUtils {
         editor.apply();
     }
 
-    public static String readHeadImg(Context context){
+    public static String readHeadImg(Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         return mySharedPreferences.getString("head_img", "");
@@ -192,7 +209,7 @@ public class PrefUtils {
 
 
     //微信昵称
-    public static void writeNiceName(String token,Context context){
+    public static void writeNiceName(String token, Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySharedPreferences.edit();
@@ -200,7 +217,7 @@ public class PrefUtils {
         editor.apply();
     }
 
-    public static String readNiceName(Context context){
+    public static String readNiceName(Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         return mySharedPreferences.getString("nick_name", "");
@@ -208,7 +225,7 @@ public class PrefUtils {
     }
 
     //性别
-    public static void writeGender(String token,Context context){
+    public static void writeGender(String token, Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySharedPreferences.edit();
@@ -216,7 +233,7 @@ public class PrefUtils {
         editor.apply();
     }
 
-    public static String readGender(Context context){
+    public static String readGender(Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         return mySharedPreferences.getString("gender", "");
@@ -224,7 +241,7 @@ public class PrefUtils {
     }
 
     //写缓存
-    public static void writeCacheDate(String key, String msg, Context context){
+    public static void writeCacheDate(String key, String msg, Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySharedPreferences.edit();
@@ -233,13 +250,14 @@ public class PrefUtils {
     }
 
     //读缓存
-    public static String readCacheDate(String key,Context context){
+    public static String readCacheDate(String key, Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         String state = mySharedPreferences.getString(key, "");
         return state;
     }
-    public static void writeDownloadUrl(String url,Context context){
+
+    public static void writeDownloadUrl(String url, Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySharedPreferences.edit();
@@ -247,7 +265,7 @@ public class PrefUtils {
         editor.apply();
     }
 
-    public static String readDownloadUrl(Context context){
+    public static String readDownloadUrl(Context context) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(
                 SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
         String url = mySharedPreferences.getString("url", "");
