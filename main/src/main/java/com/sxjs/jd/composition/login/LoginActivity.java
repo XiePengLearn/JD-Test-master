@@ -16,20 +16,12 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.app_common.service.ITokenService;
 import com.sxjs.common.base.BaseActivity;
 import com.sxjs.common.base.rxjava.ErrorDisposableObserver;
-import com.sxjs.common.util.PrefUtils;
 import com.sxjs.common.util.ToastUtil;
-import com.sxjs.common.util.Tool;
 import com.sxjs.common.util.statusbar.StatusBarUtil;
 import com.sxjs.common.view.ClearEditText;
 import com.sxjs.jd.MainDataManager;
 import com.sxjs.jd.R;
 import com.sxjs.jd.R2;
-import com.sxjs.jd.composition.main.DaggerMainActivityComponent;
-import com.sxjs.jd.composition.main.MainPresenter;
-import com.sxjs.jd.composition.main.MainPresenterModule;
-import com.sxjs.jd.composition.main.findfragment.DaggerFindFragmentComponent;
-import com.sxjs.jd.composition.main.findfragment.FindContract;
-import com.sxjs.jd.composition.main.findfragment.FindPresenterModule;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +37,7 @@ import okhttp3.ResponseBody;
  * @author xiepeng
  */
 @Route(path = "/test/login")
-public class LoginActivity extends BaseActivity implements LoginContract.View{
+public class LoginActivity extends BaseActivity implements LoginContract.View , View.OnClickListener {
     @Inject
     LoginPresenter presenter;
 
@@ -80,12 +72,14 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     TextView       register;
     private String mXinGeToken;
     private static final String TAG = "LoginActivity";
+    private Button mLoginEntry;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
         StatusBarUtil.setImmersiveStatusBar(this, true);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
 
         initView();
 
@@ -93,6 +87,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     }
 
     private void initView() {
+//        mLoginEntry = findViewById(R.id.login_entry);
+        loginEntry.setOnClickListener(this);
+
         DaggerLoginActivityComponent.builder()
                 .appComponent(getAppComponent())
                 .loginPresenterModule(new LoginPresenterModule(this, MainDataManager.getInstance(mDataManager)))
@@ -120,69 +117,73 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
         }, "mobile", "code"));
     }
 
-    @OnClick({R2.id.jkx_title_left_btn, R2.id.edit_account, R2.id.edit_password,
-            R2.id.login_remember_passwords, R2.id.login_find_password, R2.id.login_entry, R2.id.register})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R2.id.jkx_title_left_btn:
-                break;
-            case R2.id.edit_account:
-                break;
-            case R2.id.edit_password:
-                break;
-            case R2.id.login_remember_passwords:
-                break;
-            case R2.id.login_find_password:
-                break;
-            case R2.id.login_entry:
-                //登录
+//    @OnClick({R2.id.jkx_title_left_btn, R2.id.edit_account, R2.id.edit_password,
+//            R2.id.login_remember_passwords, R2.id.login_find_password, R2.id.login_entry, R2.id.register})
+//    public void onViewClicked(View view) {
+//        switch (view.getId()) {
+//            case R2.id.jkx_title_left_btn:
+//                break;
+//            case R2.id.edit_account:
+//                break;
+//            case R2.id.edit_password:
+//                break;
+//            case R2.id.login_remember_passwords:
+//                break;
+//            case R2.id.login_find_password:
+//                break;
+//            case R2.id.login_entry:
+//                //登录
+//
+//                LoginMethod();
+//                break;
+//            case R2.id.register:
+//                break;
+//        }
+//    }
 
-                String lAccount = editAccount.getText().toString().trim();
+    private void LoginMethod() {
+        String lAccount = editAccount.getText().toString().trim();
 
-                if (TextUtils.isEmpty(lAccount)) {
+        if (TextUtils.isEmpty(lAccount)) {
 
-                    ToastUtil.showToast(mContext, mContext.getResources().getString(
-                            R.string.username_not_empty), Toast.LENGTH_SHORT);
-                    return;
-                }
-
-                String lPassword = editPassword.getText().toString().trim();
-                if (TextUtils.isEmpty(lPassword)) {
-                    ToastUtil.showToast(
-                            mContext,
-                            mContext.getResources().getString(
-                                    R.string.password_not_empty), Toast.LENGTH_SHORT);
-                    return;
-                }
-
-                //密码加密 并没有用到 我给注释了
-                //                String lPasswordMD5 = Tool.encryption2(lPassword);
-
-                ITokenService service = ARouter.getInstance().navigation(ITokenService.class);
-                if (service != null) {
-                    mXinGeToken = service.getToken();
-
-                } else {
-                    Toast.makeText(this, "该服务所在模块未参加编译", Toast.LENGTH_LONG).show();
-                }
-
-                Map<String, Object> mapParameters = new HashMap<>(6);
-                mapParameters.put("MOBILE", lAccount);
-                mapParameters.put("PASSWORD", lPassword);
-                mapParameters.put("SIGNIN_TYPE", "1");
-                mapParameters.put("USER_TYPE", "1");
-                mapParameters.put("MOBILE_TYPE", "1");
-                mapParameters.put("XINGE_TOKEN", mXinGeToken);
-
-                Map<String, String> mapHeaders = new HashMap<>(1);
-                mapHeaders.put("ACTION", "S002");
-                //        mapHeaders.put("SESSION_ID", TaskManager.SESSION_ID);
-
-                initData(mapHeaders,mapParameters);
-                break;
-            case R2.id.register:
-                break;
+            ToastUtil.showToast(mContext, mContext.getResources().getString(
+                    R.string.username_not_empty), Toast.LENGTH_SHORT);
+            return;
         }
+
+        String lPassword = editPassword.getText().toString().trim();
+        if (TextUtils.isEmpty(lPassword)) {
+            ToastUtil.showToast(
+                    mContext,
+                    mContext.getResources().getString(
+                            R.string.password_not_empty), Toast.LENGTH_SHORT);
+            return;
+        }
+
+        //密码加密 并没有用到 我给注释了
+        //                String lPasswordMD5 = Tool.encryption2(lPassword);
+
+        ITokenService service = ARouter.getInstance().navigation(ITokenService.class);
+        if (service != null) {
+            mXinGeToken = service.getToken();
+
+        } else {
+            Toast.makeText(this, "该服务所在模块未参加编译", Toast.LENGTH_LONG).show();
+        }
+
+        Map<String, Object> mapParameters = new HashMap<>(6);
+        mapParameters.put("MOBILE", lAccount);
+        mapParameters.put("PASSWORD", lPassword);
+        mapParameters.put("SIGNIN_TYPE", "1");
+        mapParameters.put("USER_TYPE", "1");
+        mapParameters.put("MOBILE_TYPE", "1");
+        mapParameters.put("XINGE_TOKEN", mXinGeToken);
+
+        Map<String, String> mapHeaders = new HashMap<>(1);
+        mapHeaders.put("ACTION", "S002");
+        //        mapHeaders.put("SESSION_ID", TaskManager.SESSION_ID);
+
+        initData(mapHeaders,mapParameters);
     }
 
     @Override
@@ -228,6 +229,15 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
 
     @Override
     public void hiddenProgressDialogView() {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.login_entry) {
+            Log.e(TAG, "loginData: " + "login_entry");
+            LoginMethod();
+        }
 
     }
 }

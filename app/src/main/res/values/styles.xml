@@ -19,16 +19,13 @@
         <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
     </style>
 
-    <style name="ThemeSplash" parent="Theme.AppCompat.Light">
-        <!--startup_ic是启动页的背景图片-->
+    <style name="ThemeSplash" parent="AppTheme">
         <item name="android:windowBackground">@drawable/shape</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowFullscreen">true</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
         <item name="windowActionBar">false</item>
-        <!--隐藏状态栏的-->
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="Theme.AppLauncher" parent="@android:style/Theme.NoTitleBar.Fullscreen">
-        <item name="android:windowBackground">@drawable/shape</item>
-    </style>
+
+
 </resources>

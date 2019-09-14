@@ -103,9 +103,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.kpi.client.SplashActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
 
-            <!-- android:theme="@style/Theme.AppLauncher"> -->
+             android:theme="@style/ThemeSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
