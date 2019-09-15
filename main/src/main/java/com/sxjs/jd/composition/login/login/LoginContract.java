@@ -1,4 +1,6 @@
-package com.sxjs.jd.composition.login;
+package com.sxjs.jd.composition.login.login;
+
+import com.sxjs.jd.entities.LoginResponse;
 
 import java.util.Map;
 
@@ -12,7 +14,7 @@ public class LoginContract {
     interface View {
 
 
-        void setLoginData(String loginData);
+        void setLoginData(LoginResponse loginResponse);
 
         void showProgressDialogView();
 

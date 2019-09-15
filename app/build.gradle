@@ -57,14 +57,18 @@ android {
                 //如果需要加入小米通道，则加上应用包名
                 PACKAGE_NAME : "com.kpi.client"
         ]
+
+        multiDexEnabled true
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    //强制使用27.0.2的support库
     configurations.all {
-        resolutionStrategy.force "com.android.support:support-v4:26.1.0"
+        resolutionStrategy.force "com.android.support:support-v4:27.0.2"
     }
 
     buildTypes {
@@ -144,4 +148,6 @@ dependencies {
     implementation 'com.tencent.xinge:xgmz:4.3.2-meizu-release'
     implementation 'com.tencent.xinge:xghw:4.3.2-huawei-release'
     //#信鸽结束
+
+    implementation 'com.android.support:multidex:1.0.3'
 }

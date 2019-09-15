@@ -1,7 +1,6 @@
-package com.sxjs.jd.composition.login;
+package com.sxjs.jd.composition.login.login;
 
 import com.sxjs.jd.MainDataManager;
-import com.sxjs.jd.composition.main.MainContract;
 
 import dagger.Module;
 import dagger.Provides;

@@ -1,12 +1,9 @@
 package com.kpi.client;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -17,8 +14,6 @@ import com.sxjs.common.base.BaseActivity;
 import com.sxjs.common.util.LogUtil;
 import com.sxjs.common.util.PrefUtils;
 import com.sxjs.common.util.statusbar.StatusBarUtil;
-import com.sxjs.jd.composition.login.LoginActivity;
-import com.sxjs.jd.composition.main.MainActivity;
 import com.tencent.android.tpush.XGPushConfig;
 
 import butterknife.ButterKnife;
@@ -69,8 +64,8 @@ public class SplashActivity extends BaseActivity {
         RelativeLayout rlRoot = (RelativeLayout) findViewById(R.id.rl_root);
 
         // 渐变动画
-        AlphaAnimation alpha = new AlphaAnimation(0, 1);
-        alpha.setDuration(1500);
+        AlphaAnimation alpha = new AlphaAnimation(1, 1);
+        alpha.setDuration(800);
         alpha.setFillAfter(true);
 
         AnimationSet set = new AnimationSet(false);// 初始化动画集合
@@ -94,42 +89,34 @@ public class SplashActivity extends BaseActivity {
                         SplashActivity.this, PREF_IS_USER_GUIDE_SHOWED, false);
 
                 if (showed) {
-                    // 已经展示过, 进入主页面
+                    //已经展示过, 进入主页面
                     //enterLogin ture 进登录界面 false 进main界面
                     boolean enterLogin = PrefUtils.getBoolean(SplashActivity.this, PREF_IS_ENTER_LOG_OR_MAIN, true);
                     if (enterLogin) {
 
-                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                        intent.putExtra("title", "登录");
-                        startActivity(intent);
-                        finish();
+                        ARouter.getInstance().build("/login/login").greenChannel().navigation(SplashActivity.this);
+
                     } else {
-                        String token = PrefUtils.readToken(SplashActivity.this);
-                        if (!TextUtils.isEmpty(token)) {
-                            String isPhone = PrefUtils.readIsPhone(SplashActivity.this);
+                        /*
+                          绩时查现在是的需求是直接打开应用就是登录页，后期该需求的话，可以把下面打开，是登录之后获取SESSION_ID不为空就跳主页
+                         */
 
-                            if (!TextUtils.isEmpty(isPhone)) {
-                                if ("1".equals(isPhone)) {
-
-                                    Intent mIntent = new Intent(mContext, MainActivity.class);
-                                    mIntent.putExtra("title", "首页");
-                                    startActivity(mIntent);
-
-                                    finish(); //结束当前的activity的生命周期
-
-
-                                }
-                            }
+                        /*String SESSION_ID = PrefUtils.readSESSION_ID(SplashActivity.this);
+                        if (!TextUtils.isEmpty(SESSION_ID)) {
+                            ARouter.getInstance().build("/main/MainActivity").greenChannel().navigation(SplashActivity.this);
 
                         } else {
-                            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                            intent.putExtra("title", "登录");
-                            startActivity(intent);
-                            finish();
+                            ARouter.getInstance().build("/login/login").greenChannel().navigation(SplashActivity.this);
 
-                        }
+                        }*/
+
+                        /*
+                          暂时都写跳登录页
+                         */
+                        ARouter.getInstance().build("/login/login").greenChannel().navigation(SplashActivity.this);
+
                     }
-
+                    finish();
                 } else {
                     // 没展示, 进入新手引导页面
                     startActivity(new Intent(SplashActivity.this,

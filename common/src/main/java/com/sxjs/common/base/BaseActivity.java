@@ -28,11 +28,13 @@ import io.reactivex.disposables.Disposable;
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
-    protected DataManager mDataManager;
-    protected Context mContext;
-    protected Dialog loadingDialog;
-    protected Unbinder unbinder;
-    private NetWorkChangeBroadcastReceiver receiver;
+    protected DataManager                    mDataManager;
+    protected Context                        mContext;
+    protected Dialog                         loadingDialog;
+    //    protected Dialog dialog;
+    protected Unbinder                       unbinder;
+    private   NetWorkChangeBroadcastReceiver receiver;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,51 +47,61 @@ public abstract class BaseActivity extends AppCompatActivity {
         receiver = new NetWorkChangeBroadcastReceiver(this);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(receiver , intentFilter);
+        registerReceiver(receiver, intentFilter);
     }
 
     protected AppComponent getAppComponent() {
         return GlobalAppComponent.getAppComponent();
     }
 
-    protected void addFragment(int containerViewId, Fragment fragment , String tag) {
+    protected void addFragment(int containerViewId, Fragment fragment, String tag) {
         final FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
 
-        fragmentTransaction.add(containerViewId, fragment , tag);
+        fragmentTransaction.add(containerViewId, fragment, tag);
         fragmentTransaction.commit();
     }
 
-    protected void showShortToast(String message){
-        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+    protected void showShortToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    protected void showLongToast(String message){
-        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+    protected void showLongToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 
-    protected void showProgressDialog(){
-        this.showProgressDialog(null,null);
+    protected void showProgressDialog() {
+        this.showProgressDialog(null, null);
     }
 
-    protected void showProgressDialog(String msg){
-        this.showProgressDialog(msg , null);
+    protected void showProgressDialog(String msg) {
+        this.showProgressDialog(msg, null);
     }
 
-    protected void showProgressDialog(DialogInterface.OnCancelListener listener){
-        this.showProgressDialog(null ,listener);
+    protected void showProgressDialog(DialogInterface.OnCancelListener listener) {
+        this.showProgressDialog(null, listener);
     }
 
-    protected void showProgressDialog(String msg , DialogInterface.OnCancelListener listener){
-        if(loadingDialog == null){
+    protected void showProgressDialog(String msg, DialogInterface.OnCancelListener listener) {
+        /*if(loadingDialog == null){
             loadingDialog = DialogUtil.createLoadingDialog(this, msg, listener);
         }else if(!loadingDialog.isShowing()){
+            loadingDialog.show();
+        }*/
+
+        if (loadingDialog == null)
+            loadingDialog = DialogUtil.createJDLoadingDialog(this, null);
+        if (!loadingDialog.isShowing()) {
             loadingDialog.show();
         }
 
     }
 
-    protected void hiddenProgressDialog(){
-        if(loadingDialog != null && loadingDialog.isShowing()){
+    protected void hiddenProgressDialog() {
+        /*if(loadingDialog != null && loadingDialog.isShowing()){
+            loadingDialog.dismiss();
+        }*/
+
+        if (loadingDialog != null && loadingDialog.isShowing()) {
             loadingDialog.dismiss();
         }
     }
@@ -99,10 +111,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 添加观察者
+     *
      * @param disposable d
      */
-    public void addDisposable(Disposable disposable){
-        if(disposables == null){
+    public void addDisposable(Disposable disposable) {
+        if (disposables == null) {
             disposables = new CompositeDisposable();
         }
         disposables.add(disposable);
@@ -112,8 +125,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 注销观察者，防止泄露
      */
-    public void clearDisposable(){
-        if(disposables != null){
+    public void clearDisposable() {
+        if (disposables != null) {
             disposables.clear();
             disposables = null;
         }
@@ -122,22 +135,21 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(loadingDialog != null && loadingDialog.isShowing()){
+        if (loadingDialog != null && loadingDialog.isShowing()) {
             loadingDialog.dismiss();
             loadingDialog = null;
         }
         clearDisposable();
-        if(unbinder != null){
+        if (unbinder != null) {
             unbinder.unbind();
         }
 
-        if(null != receiver){
+        if (null != receiver) {
             receiver.onDestroy();
             unregisterReceiver(receiver);
             receiver = null;
         }
     }
-
 
 
 }

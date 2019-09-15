@@ -45,6 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:cursorVisible="true"
                     android:gravity="left|center_vertical"
                     android:hint="请输入您的用户名"
                     android:paddingRight="@dimen/x10"
@@ -52,6 +53,7 @@
                     android:text=""
                     android:textColor="#333333"
                     android:textColorHint="#dddddd"
+                    android:textCursorDrawable="@drawable/text_cursor"
                     android:textSize="@dimen/x16" />
 
             </LinearLayout>
@@ -77,6 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
+
                     android:gravity="left|center_vertical"
                     android:hint="请输入您的密码"
                     android:inputType="textPassword"
@@ -86,6 +89,8 @@
                     android:text=""
                     android:textColor="#333333"
                     android:textColorHint="#dddddd"
+                    android:cursorVisible="true"
+                    android:textCursorDrawable="@drawable/text_cursor"
                     android:textSize="@dimen/x16" />
 
                 <View
@@ -156,7 +161,6 @@
                 android:text="@string/regist_regist"
                 android:textColor="#333333"
                 android:textSize="@dimen/x15" />
-
 
 
         </LinearLayout>

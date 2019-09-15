@@ -12,6 +12,83 @@ import android.content.SharedPreferences;
 public class PrefUtils {
     private static final String SHARE_PREFS_NAME = "kpi_client";
 
+
+    public static void writeUserName(String userName, Context context) {
+        SharedPreferences mySharedPreferences = context.getSharedPreferences(
+                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mySharedPreferences.edit();
+        editor.putString("userName", userName);
+        editor.apply();
+    }
+
+    public static String readUserName(Context context) {
+        SharedPreferences mySharedPreferences = context.getSharedPreferences(
+                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
+        return mySharedPreferences.getString("userName", "");
+    }
+
+    public static void writePassword(String password, Context context) {
+        SharedPreferences mySharedPreferences = context.getSharedPreferences(
+                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mySharedPreferences.edit();
+        editor.putString("password", password);
+        editor.apply();
+    }
+
+    public static String readPassword(Context context) {
+        SharedPreferences mySharedPreferences = context.getSharedPreferences(
+                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
+        return mySharedPreferences.getString("password", "");
+
+    }
+
+    public static void writeCheckRemember(boolean isCheckRemember, Context context) {
+        SharedPreferences mySharedPreferences = context.getSharedPreferences(
+                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mySharedPreferences.edit();
+        editor.putBoolean("isCheckRemember", isCheckRemember);
+        editor.apply();
+    }
+
+    public static boolean readCheckRemember(Context context) {
+        SharedPreferences mySharedPreferences = context.getSharedPreferences(
+                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
+        return mySharedPreferences.getBoolean("isCheckRemember",false);
+
+    }
+
+    //绩时查 token
+    public static void writeSESSION_ID(String SESSION_ID, Context context) {
+        SharedPreferences mySharedPreferences = context.getSharedPreferences(
+                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mySharedPreferences.edit();
+        editor.putString("SESSION_ID", SESSION_ID);
+        editor.apply();
+    }
+
+    public static String readSESSION_ID(Context context) {
+        SharedPreferences mySharedPreferences = context.getSharedPreferences(
+                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
+        return mySharedPreferences.getString("SESSION_ID", "");
+
+    }
+
+    //绩时查 token
+    public static void writeXinGeToken(String xinGeToken, Context context) {
+        SharedPreferences mySharedPreferences = context.getSharedPreferences(
+                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mySharedPreferences.edit();
+        editor.putString("xin_ge_token", xinGeToken);
+        editor.apply();
+    }
+
+    public static String readXinGeToken(Context context) {
+        SharedPreferences mySharedPreferences = context.getSharedPreferences(
+                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
+        return mySharedPreferences.getString("xin_ge_token", "");
+
+    }
+
     public static void putBoolean(Context ctx, String key, boolean value) {
         SharedPreferences pref = ctx.getSharedPreferences(SHARE_PREFS_NAME,
                 Context.MODE_PRIVATE);
@@ -55,19 +132,6 @@ public class PrefUtils {
         return pref.getInt(key, defaultValue);
     }
 
-    public static void writePhone(String phone, Context context) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(
-                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("phone", phone);
-        editor.apply();
-    }
-
-    public static String readPhone(Context context) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(
-                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("phone", "");
-    }
 
     //0没有绑定手机号  1已经绑定手机号
     public static void writeIsPhone(String isPhone, Context context) {
@@ -126,53 +190,6 @@ public class PrefUtils {
         return mySharedPreferences.getString("latitude", "");
     }
 
-
-    public static void writePassword(String password, Context context) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(
-                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("password", password);
-        editor.apply();
-    }
-
-    public static String readPassword(Context context) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(
-                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("password", "");
-
-    }
-
-    //绩时查 token
-    public static void writeToken(String token, Context context) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(
-                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("token", token);
-        editor.apply();
-    }
-
-    public static String readToken(Context context) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(
-                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("token", "");
-
-    }
-
-    //绩时查 token
-    public static void writeXinGeToken(String xinGeToken, Context context) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(
-                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("xin_ge_token", xinGeToken);
-        editor.apply();
-    }
-
-    public static String readXinGeToken(Context context) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(
-                SHARE_PREFS_NAME, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("xin_ge_token", "");
-
-    }
 
     //绩时查 UID
     public static void writeUid(String token, Context context) {

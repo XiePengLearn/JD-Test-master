@@ -86,15 +86,9 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
 
         mFragmentManager.beginTransaction().show(mMainHomeFragment)
                 .commitAllowingStateLoss();
-        if (mClassificationFragment != null) {
-            mFragmentManager.beginTransaction().hide(mClassificationFragment).commitAllowingStateLoss();
-        }
-        if (mFindFragment != null) {
-            mFragmentManager.beginTransaction().hide(mFindFragment).commitAllowingStateLoss();
-        }
-        if (mMyFragment != null) {
-            mFragmentManager.beginTransaction().hide(mMyFragment).commitAllowingStateLoss();
-        }
+        hideClassificationFragmnt();
+        hideFindFragment();
+        hideMyFragment();
 
         DaggerMainActivityComponent.builder()
                 .appComponent(getAppComponent())
@@ -112,80 +106,92 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
                 mMainHomeFragment = MainHomeFragment.newInstance();
                 addFragment(R.id.main_container, mMainHomeFragment, "home_fg");
             }
+
+            hideClassificationFragmnt();
+            hideFindFragment();
+            hideMyFragment();
+
             mFragmentManager.beginTransaction()
 
                     .show(mMainHomeFragment)
                     .commitAllowingStateLoss();
 
-            if (mClassificationFragment != null) {
-                mFragmentManager.beginTransaction().hide(mClassificationFragment).commitAllowingStateLoss();
-            }
-            if (mFindFragment != null) {
-                mFragmentManager.beginTransaction().hide(mFindFragment).commitAllowingStateLoss();
-            }
-            if (mMyFragment != null) {
-                mFragmentManager.beginTransaction().hide(mMyFragment).commitAllowingStateLoss();
-            }
+
         } else if (position == 1) {
             if (mClassificationFragment == null) {
                 mClassificationFragment = ClassificationFragment.newInstance();
                 addFragment(R.id.main_container, mClassificationFragment, "class_fg");
             }
+
+            hideHomeFragment();
+
+            hideFindFragment();
+            hideMyFragment();
+
+
             mFragmentManager.beginTransaction()
                     .show(mClassificationFragment)
                     .commitAllowingStateLoss();
 
-
-            if (mMainHomeFragment != null) {
-                mFragmentManager.beginTransaction().hide(mMainHomeFragment).commitAllowingStateLoss();
-            }
-
-            if (mFindFragment != null) {
-                mFragmentManager.beginTransaction().hide(mFindFragment).commitAllowingStateLoss();
-            }
-            if (mMyFragment != null) {
-                mFragmentManager.beginTransaction().hide(mMyFragment).commitAllowingStateLoss();
-            }
 
         } else if (position == 2) {
             if (mFindFragment == null) {
                 mFindFragment = FindFragment.newInstance();
                 addFragment(R.id.main_container, mFindFragment, "find_fg");
             }
+
+
+            hideHomeFragment();
+            hideClassificationFragmnt();
+
+            hideMyFragment();
+
+
             mFragmentManager.beginTransaction()
                     .show(mFindFragment)
                     .commitAllowingStateLoss();
 
-            if (mMainHomeFragment != null) {
-                mFragmentManager.beginTransaction().hide(mMainHomeFragment).commitAllowingStateLoss();
-            }
-            if (mClassificationFragment != null) {
-                mFragmentManager.beginTransaction().hide(mClassificationFragment).commitAllowingStateLoss();
-            }
 
-            if (mMyFragment != null) {
-                mFragmentManager.beginTransaction().hide(mMyFragment).commitAllowingStateLoss();
-            }
         } else if (position == 3) {
 
             if (mMyFragment == null) {
                 mMyFragment = MyFragment.newInstance();
                 addFragment(R.id.main_container, mMyFragment, "my_fg");
             }
+
+            hideHomeFragment();
+            hideClassificationFragmnt();
+            hideFindFragment();
+
             mFragmentManager.beginTransaction()
                     .show(mMyFragment)
                     .commitAllowingStateLoss();
 
-            if (mMainHomeFragment != null) {
-                mFragmentManager.beginTransaction().hide(mMainHomeFragment).commitAllowingStateLoss();
-            }
-            if (mClassificationFragment != null) {
-                mFragmentManager.beginTransaction().hide(mClassificationFragment).commitAllowingStateLoss();
-            }
-            if (mFindFragment != null) {
-                mFragmentManager.beginTransaction().hide(mFindFragment).commitAllowingStateLoss();
-            }
 
+        }
+    }
+
+    private void hideHomeFragment() {
+        if (mMainHomeFragment != null) {
+            mFragmentManager.beginTransaction().hide(mMainHomeFragment).commitAllowingStateLoss();
+        }
+    }
+
+    private void hideMyFragment() {
+        if (mMyFragment != null) {
+            mFragmentManager.beginTransaction().hide(mMyFragment).commitAllowingStateLoss();
+        }
+    }
+
+    private void hideFindFragment() {
+        if (mFindFragment != null) {
+            mFragmentManager.beginTransaction().hide(mFindFragment).commitAllowingStateLoss();
+        }
+    }
+
+    private void hideClassificationFragmnt() {
+        if (mClassificationFragment != null) {
+            mFragmentManager.beginTransaction().hide(mClassificationFragment).commitAllowingStateLoss();
         }
     }
 
@@ -224,7 +230,6 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
 
     private String text;
     private String loginData;
-
 
 
     @Override

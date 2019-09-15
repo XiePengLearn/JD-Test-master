@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 import com.sxjs.common.util.DensityUtils;
 import com.sxjs.common.util.PrefUtils;
 import com.sxjs.common.util.statusbar.StatusBarUtil;
-import com.sxjs.jd.composition.login.LoginActivity;
+import com.sxjs.jd.composition.login.login.LoginActivity;
 
 import java.util.ArrayList;
 

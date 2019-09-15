@@ -14,7 +14,7 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [ AROUTER_MODULE_NAME : project.getName() ]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
     }
@@ -68,5 +68,11 @@ dependencies {
     api "com.alibaba:arouter-api:$rootProject.arouterVersion"
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.arouterCompilerVersion"
 
+//图片加载控件
+    api 'com.blankj:utilcode:1.25.5'
+    api 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
+
+    //eventbus
+//    api 'org.greenrobot:eventbus:3.1.1'
 
 }

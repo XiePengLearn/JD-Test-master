@@ -27,6 +27,35 @@ import okhttp3.ResponseBody;
 
 public class MainDataManager extends BaseDataManager {
 
+    //绩效app接口开始
+    //public static String KPI_ROOT_URL = "http://192.168.1.75:8086/api";
+    public static String KPI_ROOT_URL = "http://114.247.234.146:8086/api";
+
+
+    //通用模块路径
+    public static String GENERAL_DIR = "/cm/v1";
+
+    //消息模块路径
+    public static String MESSAGE_DIR = "/i/v1";
+
+    //系统模块路径
+    public static String SYSTEM_DIR_BASE = "/s/v1";
+
+    //咨询模块路径
+    public static String ASK_DIR  = "/q/v1";
+    //首页模块路径
+    public static String HOME_DIR = "/h/v1";
+
+    //考中模块路径
+    public static String MIDDLE_DIR = "/x/v1";
+
+    //考前模块路径
+    public static String BEFORE_DIR = "/y/v1";
+
+    //审核模块路径
+    public static String SHENHE_DIR = "/t/v1";
+
+    //绩效app接口结束
     public MainDataManager(DataManager mDataManager) {
         super(mDataManager);
     }
@@ -52,13 +81,59 @@ public class MainDataManager extends BaseDataManager {
 
     }
 
+
+    /**
+     * 获取登录数据
+     *
+     * @param mapHeaders    请求头
+     * @param mapParameters 请求参数
+     * @param consumer      consumer
+     * @return Disposable
+     */
     public Disposable getLoginData(Map<String, String> mapHeaders, Map<String, Object> mapParameters, DisposableObserver<ResponseBody> consumer) {
+        return changeIOToMainThread(getService(BaseApiService.class).executePostHeader
+                (KPI_ROOT_URL + SYSTEM_DIR_BASE, mapParameters, mapHeaders), consumer);
+    }
 
+    /**
+     * 获取注册数据
+     *
+     * @param mapHeaders    请求头
+     * @param mapParameters 请求参数
+     * @param consumer      consumer
+     * @return Disposable
+     */
+    public Disposable getRegisretData(Map<String, String> mapHeaders, Map<String, Object> mapParameters, DisposableObserver<ResponseBody> consumer) {
+        return changeIOToMainThread(getService(BaseApiService.class).executePostHeader
+                (KPI_ROOT_URL + SYSTEM_DIR_BASE, mapParameters, mapHeaders), consumer);
 
+    }
 
+    /**
+     * 获取注册数据
+     *
+     * @param mapHeaders    请求头
+     * @param mapParameters 请求参数
+     * @param consumer      consumer
+     * @return Disposable
+     */
+    public Disposable getForgetPasswordData(Map<String, String> mapHeaders, Map<String, Object> mapParameters, DisposableObserver<ResponseBody> consumer) {
+        return changeIOToMainThread(getService(BaseApiService.class).executePostHeader
+                (KPI_ROOT_URL + SYSTEM_DIR_BASE, mapParameters, mapHeaders), consumer);
 
+    }
 
-        return changeIOToMainThread(getService(BaseApiService.class).executePostHeader("http://114.247.234.146:8086/api/s/v1", mapParameters, mapHeaders), consumer);
+    /**
+     * 获取验证码
+     *
+     * @param mapHeaders    请求头
+     * @param mapParameters 请求参数
+     * @param consumer      consumer
+     * @return Disposable
+     */
+    public Disposable getRegisretCodeData(Map<String, String> mapHeaders, Map<String, Object> mapParameters, DisposableObserver<ResponseBody> consumer) {
+        return changeIOToMainThread(getService(BaseApiService.class).executePostHeader
+                (KPI_ROOT_URL + GENERAL_DIR, mapParameters, mapHeaders), consumer);
 
     }
 

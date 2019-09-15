@@ -1,4 +1,4 @@
-package com.sxjs.jd.composition.login;
+package com.sxjs.jd.composition.login.login;
 
 import com.sxjs.common.AppComponent;
 import com.sxjs.common.PerActivity;
