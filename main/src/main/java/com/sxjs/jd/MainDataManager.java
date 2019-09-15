@@ -110,7 +110,7 @@ public class MainDataManager extends BaseDataManager {
     }
 
     /**
-     * 获取注册数据
+     * 获取忘记密码数据
      *
      * @param mapHeaders    请求头
      * @param mapParameters 请求参数

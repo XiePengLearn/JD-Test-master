@@ -9,7 +9,7 @@ import java.util.Map;
  * @Date: 2019/9/13 22:10
  * @Description:
  */
-public class LoginContract {
+public interface LoginContract {
 
     interface View {
 

@@ -11,7 +11,7 @@ import java.util.Map;
  * @Date: 2019/9/14 23:30
  * @Description:
  */
-public class RegisterContract {
+public interface RegisterContract {
     interface View {
 
 

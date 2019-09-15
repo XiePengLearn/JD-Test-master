@@ -11,7 +11,7 @@ import java.util.Map;
  * @Date: 2019/9/15 10:34
  * @Description:
  */
-public class ForgetPasswordContract {
+public interface ForgetPasswordContract {
     interface View {
 
 
