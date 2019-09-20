@@ -8,20 +8,16 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.example.app_common.service.ITokenService;
-import com.sxjs.common.util.PrefUtils;
+import com.sxjs.common.base.BaseActivity;
 import com.sxjs.common.util.statusbar.StatusBarUtil;
 import com.sxjs.common.widget.bottomnavigation.BadgeItem;
 import com.sxjs.common.widget.bottomnavigation.BottomNavigationBar;
 import com.sxjs.common.widget.bottomnavigation.BottomNavigationItem;
 import com.sxjs.jd.MainDataManager;
 import com.sxjs.jd.R;
-import com.sxjs.common.base.BaseActivity;
 import com.sxjs.jd.R2;
 import com.sxjs.jd.composition.main.classificationfragment.ClassificationFragment;
 import com.sxjs.jd.composition.main.findfragment.FindFragment;
-import com.sxjs.jd.composition.main.home.HomePageFragment;
 import com.sxjs.jd.composition.main.homefragment.MainHomeFragment;
 import com.sxjs.jd.composition.main.my.MyFragment;
 
@@ -40,7 +36,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
     @BindView(R2.id.main_container)
     FrameLayout         mainContainer;
     //    private MainHomeFragment       mMainHomeFragment;
-    private HomePageFragment       mMainHomeFragment;
+    private MainHomeFragment       mMainHomeFragment;
     private ClassificationFragment mClassificationFragment;
     private FragmentManager        mFragmentManager;
     private FindFragment           mFindFragment;
@@ -61,13 +57,13 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
     }
 
     public void initView() {
-        mMainHomeFragment = (HomePageFragment) mFragmentManager.findFragmentByTag("home_fg");
+        mMainHomeFragment = (MainHomeFragment) mFragmentManager.findFragmentByTag("home_fg");
         mClassificationFragment = (ClassificationFragment) mFragmentManager.findFragmentByTag("class_fg");
         mFindFragment = (FindFragment) mFragmentManager.findFragmentByTag("find_fg");
         mMyFragment = (MyFragment) mFragmentManager.findFragmentByTag("my_fg");
 
         if (mMainHomeFragment == null) {
-            mMainHomeFragment = HomePageFragment.newInstance();
+            mMainHomeFragment = MainHomeFragment.newInstance();
             addFragment(R.id.main_container, mMainHomeFragment, "home_fg");
         }
         //更改位置,初始化在  点击底部导航栏 position 为1  初始化
@@ -107,7 +103,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Bot
     public void onTabSelected(int position) {
         if (position == 0) {
             if (mMainHomeFragment == null) {
-                mMainHomeFragment = HomePageFragment.newInstance();
+                mMainHomeFragment = MainHomeFragment.newInstance();
                 addFragment(R.id.main_container, mMainHomeFragment, "home_fg");
             }
 
